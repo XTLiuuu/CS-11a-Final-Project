@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class TTT3{
-  public static int[][] board = new int[3][3];
+  public static char[][] board = new int[3][3];
   public static boolean first;
   public static Scanner input = new Scanner(System.in);
   public static int currentR,currentC;
