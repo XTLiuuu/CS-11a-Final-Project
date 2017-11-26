@@ -51,27 +51,37 @@ public class TTT3{
 
   public static void computer(){
     System.out.println("Now it's my turn");
-    System.out.println();
+    System.out.println(" ");
     if(i%2==0){
       if(board[1][1]==' '){ //computer go second
         board[1][1]='O';
+        currentR=1;
+        currentC=1;
       }
 
     }
     if (i%2!=0){ //computer go first
       if(i==1){
         board[0][0]='O';
+        currentR=0;
+        currentC=0;
       }
       else if(i==3){
         if(board[1][1]=='X'){
           board[2][2]='O';
+          currentR=2;
+          currentC=2;
         }
         else{
           if(currentR==0){
             board[2][0]='O';
+            currentR=2;
+            currentC=0;
           }
           else{
             board[0][2]='O';
+            currentR=0;
+            currentC=2;
           }
         }
       }
@@ -83,21 +93,30 @@ public class TTT3{
         }
       }
     }
+    checkwinner(currentR,currentC);
   }
 
   public static boolean checkCorner(){
     boolean check=true;
     if(board[0][0]==' '){
       board[0][0]='O';
+      currentR=0;
+      currentC=0;
     }
     else if(board[2][2]==' '){
       board[2][2]='O';
+      currentR=2;
+      currentC=2;
     }
     else if(board[0][2]==' '){
       board[0][2]='O';
+      currentR=0;
+      currentC=2;
     }
     else if(board[2][0]==' '){
       board[2][0]='O';
+      currentR=2;
+      currentC=0;
     }
     else{
       check=false;
@@ -110,6 +129,8 @@ public class TTT3{
         for (int col = 0; col < 3; col++) {
            if (board[row][col] == ' ') {
               board[row][col] = 'O';
+              currentR=row;
+              currentC=col;
               break;
            }
         }
@@ -134,23 +155,26 @@ public class TTT3{
 
   public static boolean checkRow(){
     boolean check=true;
-    int i=0;
     for(int row=0;row<3;row++){
       if((board[row][0]==board[row][1])&&(empty(row,2))) {
         board[row][2]='O';
-        break;
+        currentR=row;
+        currentC=2;
+        return check;
       } else if((board[row][0]==board[row][2])&&(empty(row,1))){
         board[row][1]='O';
-        break;
+        currentR=row;
+        currentC=1;
+        return check;
       } else if((board[row][1]==board[row][2])&&(empty(row,0))){
         board[row][0]='O';
-        break;
+        currentR=row;
+        currentC=0;
+        return check;
       } else {
-        i++;
+        check=false;
+        return check;
       }
-    }
-    if (i==3){
-      check=false;
     }
     return check;
   }
@@ -158,23 +182,26 @@ public class TTT3{
 
   public static boolean checkCol(){
     boolean check=true;
-    int i=0;
     for(int col=0;col<3;col++){
-      if((board[0][col]==board[1][col])&&(empty(2,col))){
-        board[2][col]='O';
-        break;
+      if((board[0][col]==board[1][col])&&(empty(0,col))){
+        board[0][col]='O';
+        currentR=0;
+        currentC=col;
+        return check;
       } else if((board[0][col]==board[2][col])&&(empty(1,col))){
         board[1][col]='O';
-        break;
-      } else if((board[1][col]==board[2][col])&&(empty(0,col))){
-        board[0][col]='O';
-        break;
+        currentR=1;
+        currentC=col;
+        return check;
+      } else if((board[1][col]==board[2][col])&&(empty(2,col))){
+        board[2][col]='O';
+        currentR=2;
+        currentC=col;
+        return check;
       } else {
-        i++;
+        check=false;
+        return check;
       }
-    }
-    if (i==3){
-      check=false;
     }
     return check;
   }
@@ -182,44 +209,48 @@ public class TTT3{
 
   public static boolean checkDiagonal(){
     boolean check=true;
-    int i=0;
     if((board[0][0]==board[1][1])&&(empty(2,2))){
       board[2][2]='O';
-      break;
+      currentR=2;
+      currentC=2;
+      return check;
     } else if((board[0][0]==board[2][2])&&(empty(1,1))){
       board[1][1]='O';
-      break;
+      currentR=1;
+      currentC=1;
+      return check;
     } else if((board[1][1]==board[2][2])&&(empty(0,0))){
       board[0][0]='O';
-      break;
+      currentR=0;
+      currentC=0;
+      return check;
     } else{
-      i++;
-    }
-    if (i==3){
       check=false;
+      return check;
     }
-    return check;
   }
 
   public static boolean checkOppositeDiagonal(){
     boolean check=true;
-    int i=0;
     if((board[0][2]==board[1][1])&&(empty(2,0))){
       board[2][0]='O';
-      break;
+      currentR=2;
+      currentC=0;
+      return check;
     } else if((board[0][2]==board[2][0])&&(empty(1,1))){
       board[1][1]='O';
-      break;
+      currentR=1;
+      currentC=1;
+      return check;
     } else if((board[1][1]==board[2][0])&&(empty(0,2))){
       board[0][2]='O';
-      break;
+      currentR=0;
+      currentC=2;
+      return check;
     } else{
-      i++;
-    }
-    if (i==3){
       check=false;
+      return check;
     }
-    return check;
   }
 
   public static void player(){
