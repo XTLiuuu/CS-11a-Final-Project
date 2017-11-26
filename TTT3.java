@@ -107,3 +107,89 @@ public class TTT3{
         || ((currentR + currentC == 2)&&(board[0][2] == currentPlayer)&&(board[1][1] == currentPlayer)&&(board[2][0] == currentPlayer));
   }
 }
+
+
+
+public static void computerMove(){
+  if(twoOccupied()){
+
+  }
+}
+
+
+public static boolean twoOccupied(){
+  if(!checkRow()) {
+    checkCol();
+  } else if(!checkCol()){
+    checkDiagnol();//check diagonal from left to right
+  } else if(!checkDiagnol){
+    checkOppositeDiagonal();// check diagonal from right to left
+  }
+
+
+
+  }
+  }
+}
+
+public static boolean checkRow(){
+  boolean check=true;
+  for(int row=0;row<3;row++){
+    if(board[row][0]==board[row][1]) {
+      //go [row][2]
+    } else if(board[row][0]==board[row][2]){
+      // go [row][1]
+    } else if(board[row][1]==board[row][2]){
+      //go [row][0]
+    } else {
+      check=false;
+    }
+  }
+  return check;
+}
+
+
+public static boolean checkCol(){
+  boolean check=true;
+  for(int col=0;col<3;row++){
+    if(board[0][col]==board[1][col]) {
+      //go [0][col]
+    } else if(board[0][col]==board[2][col]){
+      // go [1][col]
+    } else if(board[1][col]==board[2][col]){
+      //go [2][col]
+    } else {
+      check=false;
+    }
+  }
+  return check;
+}
+
+
+public static boolean checkDiagnol(){
+  boolean check=true;
+  if(board[0][0]==board[1][1]){
+    //go to board[2][2]
+  } else if(board[0][0]==board[2][2]){
+    // go to board[1][1]
+  } else if(board[1][1]==board[2][2]){
+    // go to board[0][0]
+  } else{
+    check=false;
+  }
+  return check;
+}
+
+public static boolean checkOppositeDiagnol(){
+  boolean check=true;
+  if(board[0][2]==board[1][1]){
+    //go to board[2][0]
+  } else if(board[0][2]==board[2][0]){
+    // go to board[1][1]
+  } else if(board[1][1]==board[2][0]){
+    // go to board[0][2]
+  } else{
+    check=false;
+  }
+  return check;
+}
