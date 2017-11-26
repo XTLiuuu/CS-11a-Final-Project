@@ -40,10 +40,54 @@ public class TTT3{
     if(first){
       player();
     }
-    //else{
-    //  computer();
-    //}
+    else{
+      computer();
+
+
+
+    }
   }
+
+
+  public static void computer(){
+    if()
+
+
+
+
+    public static void checkCorner(){
+      if(board[0][0]!='X'){
+        board[0][0]=='O';
+      }
+      else if(board[2][2]!='X'){
+        board[2][2]=='O';
+      }
+      else if(board[0][2]!='X'){
+        board[0][2]=='O';
+      }
+      else if(board[2][0]!='X'){
+        board[2][0]=='O';
+      }
+      else{
+
+      }
+
+   }
+
+
+   public static void checkEmpty(){
+     boolean check= true;
+     for (int row = 0; row < 3; row++) {
+        for (int col = 0; col < 3; col++) {
+           if (board[row][col] == ' ') {
+              board[row][col] == 'X';
+           }
+        }
+
+     }
+     return false;
+   }
+
 
   public static void player(){
     System.out.println("Please enter your move");
@@ -106,90 +150,4 @@ public class TTT3{
         || ((currentR== currentC)&&(board[0][0] == currentPlayer)&&(board[1][1] == currentPlayer)&&(board[2][2] == currentPlayer))
         || ((currentR + currentC == 2)&&(board[0][2] == currentPlayer)&&(board[1][1] == currentPlayer)&&(board[2][0] == currentPlayer));
   }
-}
-
-
-
-public static void computerMove(){
-  if(!twoOccupied()){
-
-  }
-}
-
-
-public static boolean twoOccupied(){
-  boolean check=true;
-  if(!checkRow()) {
-    checkCol();
-  } else if(!checkCol()){
-    checkDiagnol();//check diagonal from left to right
-  } else if(!checkDiagnol()){
-    checkOppositeDiagonal();// check diagonal from right to left
-  } else {
-      check=false;
-  }
-  return check;
-}
-
-
-public static boolean checkRow(){
-  boolean check=true;
-  for(int row=0;row<3;row++){
-    if(board[row][0]==board[row][1]) {
-      board[row][2]='O';
-    } else if(board[row][0]==board[row][2]){
-      board[row][1]='O';
-    } else if(board[row][1]==board[row][2]){
-      board[row][0]='O';
-    } else {
-      check=false;
-    }
-  }
-  return check;
-}
-
-
-public static boolean checkCol(){
-  boolean check=true;
-  for(int col=0;col<3;row++){
-    if(board[0][col]==board[1][col]) {
-      board[0][col]='O';
-    } else if(board[0][col]==board[2][col]){
-      board[1][col]='O';
-    } else if(board[1][col]==board[2][col]){
-      board[2][col]='O';
-    } else {
-      check=false;
-    }
-  }
-  return check;
-}
-
-
-public static boolean checkDiagnol(){
-  boolean check=true;
-  if(board[0][0]==board[1][1]){
-    board[2][2]='O';
-  } else if(board[0][0]==board[2][2]){
-    board[1][1]='O';
-  } else if(board[1][1]==board[2][2]){
-    board[0][0]='O';
-  } else{
-    check=false;
-  }
-  return check;
-}
-
-public static boolean checkOppositeDiagnol(){
-  boolean check=true;
-  if(board[0][2]==board[1][1]){
-    board[2][0]='O';
-  } else if(board[0][2]==board[2][0]){
-    board[1][1]='O';
-  } else if(board[1][1]==board[2][0]){
-    board[0][2]='O';
-  } else{
-    check=false;
-  }
-  return check;
 }
