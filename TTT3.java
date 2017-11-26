@@ -111,36 +111,36 @@ public class TTT3{
 
 
 public static void computerMove(){
-  if(twoOccupied()){
+  if(!twoOccupied()){
 
   }
 }
 
 
 public static boolean twoOccupied(){
+  boolean check=true;
   if(!checkRow()) {
     checkCol();
   } else if(!checkCol()){
     checkDiagnol();//check diagonal from left to right
-  } else if(!checkDiagnol){
+  } else if(!checkDiagnol()){
     checkOppositeDiagonal();// check diagonal from right to left
+  } else {
+      check=false;
   }
-
-
-
-  }
-  }
+  return check;
 }
+
 
 public static boolean checkRow(){
   boolean check=true;
   for(int row=0;row<3;row++){
     if(board[row][0]==board[row][1]) {
-      //go [row][2]
+      board[row][2]='O';
     } else if(board[row][0]==board[row][2]){
-      // go [row][1]
+      board[row][1]='O';
     } else if(board[row][1]==board[row][2]){
-      //go [row][0]
+      board[row][0]='O';
     } else {
       check=false;
     }
@@ -153,11 +153,11 @@ public static boolean checkCol(){
   boolean check=true;
   for(int col=0;col<3;row++){
     if(board[0][col]==board[1][col]) {
-      //go [0][col]
+      board[0][col]='O';
     } else if(board[0][col]==board[2][col]){
-      // go [1][col]
+      board[1][col]='O';
     } else if(board[1][col]==board[2][col]){
-      //go [2][col]
+      board[2][col]='O';
     } else {
       check=false;
     }
@@ -169,11 +169,11 @@ public static boolean checkCol(){
 public static boolean checkDiagnol(){
   boolean check=true;
   if(board[0][0]==board[1][1]){
-    //go to board[2][2]
+    board[2][2]='O';
   } else if(board[0][0]==board[2][2]){
-    // go to board[1][1]
+    board[1][1]='O';
   } else if(board[1][1]==board[2][2]){
-    // go to board[0][0]
+    board[0][0]='O';
   } else{
     check=false;
   }
@@ -183,11 +183,11 @@ public static boolean checkDiagnol(){
 public static boolean checkOppositeDiagnol(){
   boolean check=true;
   if(board[0][2]==board[1][1]){
-    //go to board[2][0]
+    board[2][0]='O';
   } else if(board[0][2]==board[2][0]){
-    // go to board[1][1]
+    board[1][1]='O';
   } else if(board[1][1]==board[2][0]){
-    // go to board[0][2]
+    board[0][2]='O';
   } else{
     check=false;
   }
