@@ -1,15 +1,18 @@
 import java.util.Scanner;
 
 public class TTT3{
-  public static char[][] board = new int[3][3];
+  public static char[][] board = new char[3][3];
   public static boolean first;
   public static Scanner input = new Scanner(System.in);
   public static int currentR,currentC;
   public static String currentS="P";
   public static char currentPlayer;
+  public static int i=1;
 
   public static void main(String[] args) {
     initialize(); //initialize the game before every new game begins
+    System.out.println("Would you like to go first?");
+    first=TextIO.getlnBoolean();
     do{
       playturn(); //ask the user who will play first
       //printboard();//print the current board
@@ -33,61 +36,162 @@ public class TTT3{
   }
 
   public static void playturn(){
-    System.out.println();
-    System.out.println("Would you like to go first?");
-    first=TextIO.getlnBoolean();
-    printboard();
     if(first){
       player();
+      i++;
+      first=false;
     }
     else{
       computer();
-
-
-
+      printboard();
+      first=true;
+      i++;
     }
   }
 
-
   public static void computer(){
-    if()
-
-
-
-
-    public static void checkCorner(){
-      if(board[0][0]!='X'){
-        board[0][0]=='O';
+    System.out.println("Now it's my turn");
+    System.out.println();
+    if(i%2==0){
+      if(board[1][1]==' '){ //computer go second
+        board[1][1]='O';
       }
-      else if(board[2][2]!='X'){
-        board[2][2]=='O';
+
+    }
+    if (i%2!=0){ //computer go first
+      if(i==1){
+        board[0][0]='O';
       }
-      else if(board[0][2]!='X'){
-        board[0][2]=='O';
-      }
-      else if(board[2][0]!='X'){
-        board[2][0]=='O';
+      else if(i==3){
+        if(board[1][1]=='X'){
+          board[2][2]='O';
+        }
+        else{
+          if(currentR==0){
+            board[2][0]='O';
+          }
+          else{
+            board[0][2]='O';
+          }
+        }
       }
       else{
-
+        if(twoOccupied()==false){
+          if(checkCorner()==false){
+            checkempty();
+          }
+        }
       }
+    }
+  }
 
-   }
+  public static boolean checkCorner(){
+    boolean check=true;
+    if(board[0][0]!=' '){
+      board[0][0]='O';
+    }
+    else if(board[2][2]!=' '){
+      board[2][2]='O';
+    }
+    else if(board[0][2]!=' '){
+      board[0][2]='O';
+    }
+    else if(board[2][0]!=' '){
+      board[2][0]='O';
+    }
+    else{
+      check=false;
+    }
+    return check;
+  }
 
-
-   public static void checkEmpty(){
-     boolean check= true;
+   public static void checkempty(){
      for (int row = 0; row < 3; row++) {
         for (int col = 0; col < 3; col++) {
            if (board[row][col] == ' ') {
-              board[row][col] == 'X';
+              board[row][col] = 'O';
+              break;
            }
         }
-
      }
-     return false;
    }
 
+  public static boolean twoOccupied(){
+    boolean check=true;
+    if(!checkRow()) {
+      checkCol();
+    } else if(!checkCol()){
+      checkDiagonal();//check diagonal from left to right
+    } else if(!checkDiagonal()){
+      checkOppositeDiagonal();// check diagonal from right to left
+    } else {
+      check=false;
+    }
+    return check;
+  }
+
+
+  public static boolean checkRow(){
+    boolean check=true;
+    for(int row=0;row<3;row++){
+      if((board[row][0]==board[row][1])&&(empty(row,2))) {
+        board[row][2]='O';
+      } else if((board[row][0]==board[row][2])&&(empty(row,1))){
+        board[row][1]='O';
+      } else if((board[row][1]==board[row][2])&&(empty(row,0))){
+        board[row][0]='O';
+      } else {
+        check=false;
+      }
+    }
+    return check;
+  }
+
+
+  public static boolean checkCol(){
+    boolean check=true;
+    for(int col=0;col<3;col++){
+      if((board[0][col]==board[1][col])&&(empty(0,col))){
+        board[0][col]='O';
+      } else if((board[0][col]==board[2][col])&&(empty(1,col))){
+        board[1][col]='O';
+      } else if((board[1][col]==board[2][col])&&(empty(2,col))){
+        board[2][col]='O';
+      } else {
+        check=false;
+      }
+    }
+    return check;
+  }
+
+
+  public static boolean checkDiagonal(){
+    boolean check=true;
+    if((board[0][0]==board[1][1])&&(empty(2,2))){
+      board[2][2]='O';
+    } else if((board[0][0]==board[2][2])&&(empty(1,1))){
+      board[1][1]='O';
+    } else if((board[1][1]==board[2][2])&&(empty(0,0))){
+      board[0][0]='O';
+    } else{
+      check=false;
+    }
+    return check;
+  }
+
+  public static boolean checkOppositeDiagonal(){
+    boolean check=true;
+    if((board[0][2]==board[1][1])&&(empty(2,0))){
+      board[2][0]='O';
+    } else if((board[0][2]==board[2][0])&&(empty(1,1))){
+      board[1][1]='O';
+    } else if((board[1][1]==board[2][0])&&(empty(0,2))){
+      board[0][2]='O';
+    } else{
+      check=false;
+    }
+    return check;
+  }
 
   public static void player(){
     System.out.println("Please enter your move");
@@ -111,9 +215,9 @@ public class TTT3{
   public static void printboard(){
     System.out.println();
     System.out.println(board[0][0]+" | "+board[0][1]+" | "+board[0][2]);
-    System.out.println("-------------");
+    System.out.println("---------");
     System.out.println(board[1][0]+" | "+board[1][1]+" | "+board[1][2]);
-    System.out.println("-------------");
+    System.out.println("---------");
     System.out.println(board[2][0]+" | "+board[2][1]+" | "+board[2][2]);
     System.out.println();
   }
@@ -142,12 +246,21 @@ public class TTT3{
        }
     }
     return true;  // no empty cells
- }
+  }
 
   public static boolean win(char currentPlayer, int currentR, int currentC){
     return ((board[currentR][0] == currentPlayer)&&(board[currentR][1] == currentPlayer)&&(board[currentR][2] == currentPlayer))
         || ((board[0][currentC] == currentPlayer)&&(board[1][currentC] == currentPlayer)&&(board[2][currentC] == currentPlayer))
         || ((currentR== currentC)&&(board[0][0] == currentPlayer)&&(board[1][1] == currentPlayer)&&(board[2][2] == currentPlayer))
         || ((currentR + currentC == 2)&&(board[0][2] == currentPlayer)&&(board[1][1] == currentPlayer)&&(board[2][0] == currentPlayer));
+  }
+
+
+  public static boolean empty(int row,int col){
+    if (board[row][col]==' '){
+      return true;
+    } else {
+      return false;
+    }
   }
 }
