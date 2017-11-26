@@ -14,7 +14,7 @@ public class TTT3{
     System.out.println("Would you like to go first?");
     first=TextIO.getlnBoolean();
     do{
-      playturn(); //ask the user who will play first
+      playTurn(); //ask the user who will play first
       //printboard();//print the current board
       if (currentS.equals("X")){
         System.out.println("You win!");}
@@ -35,7 +35,7 @@ public class TTT3{
     }
   }
 
-  public static void playturn(){
+  public static void playTurn(){
     if(first){
       player();
       i++;
@@ -87,7 +87,7 @@ public class TTT3{
       }
       else{
         if(twoOccupied()==false){
-          if(checkCorner()==false){
+          if(Corner()==false){
             checkempty();
           }
         }
@@ -96,32 +96,27 @@ public class TTT3{
     checkwinner(currentR,currentC);
   }
 
-  public static boolean checkCorner(){
+  public static boolean Corner(){
     boolean check=true;
+    return check=checkCorner(check);
+  }
+
+  public static boolean checkCorner(boolean check){
     if(board[0][0]==' '){
-      board[0][0]='O';
-      currentR=0;
-      currentC=0;
+      return Move(0,0,check);
     }
     else if(board[2][2]==' '){
-      board[2][2]='O';
-      currentR=2;
-      currentC=2;
+      return Move(2,2,check);
     }
     else if(board[0][2]==' '){
-      board[0][2]='O';
-      currentR=0;
-      currentC=2;
+      return Move(0,2,check);
     }
     else if(board[2][0]==' '){
-      board[2][0]='O';
-      currentR=2;
-      currentC=0;
+      return Move(2,0,check);
     }
     else{
-      check=false;
+      return false;
     }
-    return check;
   }
 
    public static void checkempty(){
@@ -139,8 +134,8 @@ public class TTT3{
 
   public static boolean twoOccupied(){
     boolean check=true;
-    if(checkRow()==false) {
-      if(checkCol()==false) {
+    if(Row()==false) {
+      if(Col()==false) {
         if(checkDiagonal()==false){//check diagonal from left to right
           if(checkOppositeDiagonal()==false){// check diagonal from right to left
             check=false;
@@ -151,105 +146,73 @@ public class TTT3{
     return check;
   }
 
-
-
-  public static boolean checkRow(){
+  public static boolean Row(){
     boolean check=true;
+    return check=checkRow(check);
+  }
+
+  public static boolean checkRow(boolean check){
     for(int row=0;row<3;row++){
       if((board[row][0]==board[row][1])&&(empty(row,2))) {
-        board[row][2]='O';
-        currentR=row;
-        currentC=2;
-        return check;
+        return Move(row,2,check);
       } else if((board[row][0]==board[row][2])&&(empty(row,1))){
-        board[row][1]='O';
-        currentR=row;
-        currentC=1;
-        return check;
+        return Move(row,1,check);
       } else if((board[row][1]==board[row][2])&&(empty(row,0))){
-        board[row][0]='O';
-        currentR=row;
-        currentC=0;
-        return check;
-      } else {
-        check=false;
-        return check;
-      }
+        return Move(row,0,check);
+      } else {}
     }
+    return false;
+  }
+
+  public static boolean Move(int a, int b, boolean check){
+    board[a][b]='O';
+    currentR=a;
+    currentC=b;
     return check;
   }
 
-
-  public static boolean checkCol(){
+  public static boolean Col(){
     boolean check=true;
+    return check=checkCol(check);
+  }
+
+  public static boolean checkCol(boolean check){
     for(int col=0;col<3;col++){
       if((board[0][col]==board[1][col])&&(empty(0,col))){
-        board[0][col]='O';
-        currentR=0;
-        currentC=col;
-        return check;
+        return Move(0,col,check);
       } else if((board[0][col]==board[2][col])&&(empty(1,col))){
-        board[1][col]='O';
-        currentR=1;
-        currentC=col;
-        return check;
+        return Move(1,col,check);
       } else if((board[1][col]==board[2][col])&&(empty(2,col))){
-        board[2][col]='O';
-        currentR=2;
-        currentC=col;
-        return check;
-      } else {
-        check=false;
-        return check;
-      }
+        return Move(2,col,check);
+      } else {}
     }
-    return check;
+    return false;
   }
 
 
   public static boolean checkDiagonal(){
     boolean check=true;
     if((board[0][0]==board[1][1])&&(empty(2,2))){
-      board[2][2]='O';
-      currentR=2;
-      currentC=2;
-      return check;
+      return Move(2,2,check);
     } else if((board[0][0]==board[2][2])&&(empty(1,1))){
-      board[1][1]='O';
-      currentR=1;
-      currentC=1;
-      return check;
+      return Move(1,1,check);
     } else if((board[1][1]==board[2][2])&&(empty(0,0))){
-      board[0][0]='O';
-      currentR=0;
-      currentC=0;
-      return check;
+      return Move(0,0,check);
     } else{
-      check=false;
-      return check;
+      return false;
     }
   }
 
   public static boolean checkOppositeDiagonal(){
     boolean check=true;
     if((board[0][2]==board[1][1])&&(empty(2,0))){
-      board[2][0]='O';
-      currentR=2;
-      currentC=0;
-      return check;
+      return Move(2,0,check);
     } else if((board[0][2]==board[2][0])&&(empty(1,1))){
-      board[1][1]='O';
-      currentR=1;
-      currentC=1;
-      return check;
+      return Move(1,1,check);
     } else if((board[1][1]==board[2][0])&&(empty(0,2))){
-      board[0][2]='O';
-      currentR=0;
-      currentC=2;
-      return check;
+      return Move(0,2,check);
     } else{
-      check=false;
-      return check;
+      return false;
     }
   }
 
