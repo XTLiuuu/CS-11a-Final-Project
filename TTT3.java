@@ -134,16 +134,23 @@ public class TTT3{
 
   public static boolean checkRow(){
     boolean check=true;
+    int i=0;
     for(int row=0;row<3;row++){
       if((board[row][0]==board[row][1])&&(empty(row,2))) {
         board[row][2]='O';
+        break;
       } else if((board[row][0]==board[row][2])&&(empty(row,1))){
         board[row][1]='O';
+        break;
       } else if((board[row][1]==board[row][2])&&(empty(row,0))){
         board[row][0]='O';
+        break;
       } else {
-        check=false;
+        i++;
       }
+    }
+    if (i==3){
+      check=false;
     }
     return check;
   }
@@ -151,16 +158,23 @@ public class TTT3{
 
   public static boolean checkCol(){
     boolean check=true;
+    int i=0;
     for(int col=0;col<3;col++){
-      if((board[0][col]==board[1][col])&&(empty(0,col))){
-        board[0][col]='O';
+      if((board[0][col]==board[1][col])&&(empty(2,col))){
+        board[2][col]='O';
+        break;
       } else if((board[0][col]==board[2][col])&&(empty(1,col))){
         board[1][col]='O';
-      } else if((board[1][col]==board[2][col])&&(empty(2,col))){
-        board[2][col]='O';
+        break;
+      } else if((board[1][col]==board[2][col])&&(empty(0,col))){
+        board[0][col]='O';
+        break;
       } else {
-        check=false;
+        i++;
       }
+    }
+    if (i==3){
+      check=false;
     }
     return check;
   }
@@ -168,13 +182,20 @@ public class TTT3{
 
   public static boolean checkDiagonal(){
     boolean check=true;
+    int i=0;
     if((board[0][0]==board[1][1])&&(empty(2,2))){
       board[2][2]='O';
+      break;
     } else if((board[0][0]==board[2][2])&&(empty(1,1))){
       board[1][1]='O';
+      break;
     } else if((board[1][1]==board[2][2])&&(empty(0,0))){
       board[0][0]='O';
+      break;
     } else{
+      i++;
+    }
+    if (i==3){
       check=false;
     }
     return check;
@@ -182,13 +203,20 @@ public class TTT3{
 
   public static boolean checkOppositeDiagonal(){
     boolean check=true;
+    int i=0;
     if((board[0][2]==board[1][1])&&(empty(2,0))){
       board[2][0]='O';
+      break;
     } else if((board[0][2]==board[2][0])&&(empty(1,1))){
       board[1][1]='O';
+      break;
     } else if((board[1][1]==board[2][0])&&(empty(0,2))){
       board[0][2]='O';
+      break;
     } else{
+      i++;
+    }
+    if (i==3){
       check=false;
     }
     return check;
