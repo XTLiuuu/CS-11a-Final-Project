@@ -87,16 +87,16 @@ public class TTT3{
 
   public static boolean checkCorner(){
     boolean check=true;
-    if(board[0][0]!=' '){
+    if(board[0][0]==' '){
       board[0][0]='O';
     }
-    else if(board[2][2]!=' '){
+    else if(board[2][2]==' '){
       board[2][2]='O';
     }
-    else if(board[0][2]!=' '){
+    else if(board[0][2]==' '){
       board[0][2]='O';
     }
-    else if(board[2][0]!=' '){
+    else if(board[2][0]==' '){
       board[2][0]='O';
     }
     else{
@@ -118,17 +118,18 @@ public class TTT3{
 
   public static boolean twoOccupied(){
     boolean check=true;
-    if(!checkRow()) {
-      checkCol();
-    } else if(!checkCol()){
-      checkDiagonal();//check diagonal from left to right
-    } else if(!checkDiagonal()){
-      checkOppositeDiagonal();// check diagonal from right to left
-    } else {
-      check=false;
+    if(checkRow()==false) {
+      if(checkCol()==false) {
+        if(checkDiagonal()==false){//check diagonal from left to right
+          if(checkOppositeDiagonal()==false){// check diagonal from right to left
+            check=false;
+          }
+        }
+      }
     }
     return check;
   }
+
 
 
   public static boolean checkRow(){
