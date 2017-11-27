@@ -50,17 +50,13 @@ public class TTT3{
   }
 
   public static boolean goCenter(){
-    boolean check = false;
+    boolean check = true;
     if(board[1][1]==' '){
-      board[1][1]='O';
-      currentR=1;
-      currentC=1;
-      check=true;
+      return check=Move(1,1,check);
+    } else {
+      return false;
     }
-    return check;
   }
-
-
 
 
   public static void computer(){
@@ -68,9 +64,11 @@ public class TTT3{
     System.out.println(" ");
     if(i%2==0){// user go first
       if(!goCenter()){
-        if(!twoOccupied()){
-          if(!Corner()){
-            checkempty();
+        if(!NoughtsOrCross('O')){
+          if(!NoughtsOrCross('X')){
+            if(!Edge()){
+              checkempty();
+            }
           }
         }
       }
@@ -101,14 +99,35 @@ public class TTT3{
         }
       }
       else{
-        if(twoOccupied()==false){
-          if(Corner()==false){
-            checkempty();
+        if(!NoughtsOrCross('O')){
+          if(!NoughtsOrCross('X')){
+            if(Corner()==false){
+              checkempty();
+            }
           }
         }
       }
     }
     checkwinner(currentR,currentC);
+  }
+
+  public static boolean Edge(){
+    boolean check=true;
+    return check=checkEdge(check);
+  }
+
+  public static boolean checkEdge(boolean check){
+    if(board[0][1]==' '){
+      return Move(0,1,check);
+    } else if(board[1][0]==' '){
+      return Move(1,0,check);
+    } else if(board[1][2]==' '){
+      return Move(1,2,check);
+    } else if(board[2][1]==' '){
+      return Move(2,1,check);
+    } else{
+      return false;
+    }
   }
 
   public static boolean Corner(){
@@ -119,17 +138,13 @@ public class TTT3{
   public static boolean checkCorner(boolean check){
     if(board[0][0]==' '){
       return Move(0,0,check);
-    }
-    else if(board[2][2]==' '){
-      return Move(2,2,check);
-    }
-    else if(board[0][2]==' '){
+    } else if(board[0][2]==' '){
       return Move(0,2,check);
-    }
-    else if(board[2][0]==' '){
+    } else if(board[2][2]==' '){
+      return Move(2,2,check);
+    } else if(board[2][0]==' '){
       return Move(2,0,check);
-    }
-    else{
+    } else{
       return false;
     }
   }
@@ -147,12 +162,12 @@ public class TTT3{
      }
    }
 
-  public static boolean twoOccupied(){
+  public static boolean NoughtsOrCross(char symbol){
     boolean check=true;
-    if(Row()==false) {
-      if(Col()==false) {
-        if(checkDiagonal()==false){//check diagonal from left to right
-          if(checkOppositeDiagonal()==false){// check diagonal from right to left
+    if(Row(symbol)==false) {
+      if(Col(symbol)==false) {
+        if(checkDiagonal(symbol)==false){//check diagonal from left to right
+          if(checkOppositeDiagonal(symbol)==false){// check diagonal from right to left
             check=false;
           }
         }
@@ -161,22 +176,41 @@ public class TTT3{
     return check;
   }
 
-  public static boolean Row(){
+  public static boolean Row(char symbol){
     boolean check=true;
-    return check=checkRow(check);
+    return check=checkRow(check,symbol);
   }
 
-  public static boolean checkRow(boolean check){
+  public static boolean checkRow(boolean check,char symbol){
     for(int row=0;row<3;row++){
-      if((board[row][0]==board[row][1])&&(empty(row,2))) {
-        return Move(row,2,check);
-      } else if((board[row][0]==board[row][2])&&(empty(row,1))){
-        return Move(row,1,check);
-      } else if((board[row][1]==board[row][2])&&(empty(row,0))){
-        return Move(row,0,check);
+      if (twoOccupied(row,0,row,1,row,2,check,symbol)){
+        return true;
+      } else if (twoOccupied(row,0,row,2,row,1,check,symbol)){
+        return true;
+      } else if (twoOccupied(row,1,row,2,row,0,check,symbol)){
+        return true;
       } else {}
     }
     return false;
+  }
+
+
+
+  /**
+  @param a row number of grid 1
+  @param b column number of grid 1
+  @param c row number of grid 2
+  @param d column number of grid 2
+  @param e row number of grid 3
+  @param f column number of grid 3
+  @param check initialized value is true
+  */
+  public static boolean twoOccupied(int a, int b, int c,int d,int e,int f,boolean check,char symbol){
+    if(board[a][b]==symbol && board[c][d]==symbol && empty(e,f)) {
+      return Move(e,f,check);
+    } else {
+      return false;
+    }
   }
 
   public static boolean Move(int a, int b, boolean check){
@@ -186,50 +220,50 @@ public class TTT3{
     return check;
   }
 
-  public static boolean Col(){
+  public static boolean Col(char symbol){
     boolean check=true;
-    return check=checkCol(check);
+    return check=checkCol(check,symbol);
   }
 
-  public static boolean checkCol(boolean check){
+  public static boolean checkCol(boolean check,char symbol){
     for(int col=0;col<3;col++){
-      if((board[0][col]==board[1][col])&&(empty(0,col))){
-        return Move(0,col,check);
-      } else if((board[0][col]==board[2][col])&&(empty(1,col))){
-        return Move(1,col,check);
-      } else if((board[1][col]==board[2][col])&&(empty(2,col))){
-        return Move(2,col,check);
+      if (twoOccupied(0,col,1,col,2,col,check,symbol)){
+        return true;
+      } else if (twoOccupied(0,col,2,col,1,col,check,symbol)){
+        return true;
+      } else if (twoOccupied(1,col,2,col,0,col,check,symbol)){
+        return true;
       } else {}
     }
     return false;
   }
 
 
-  public static boolean checkDiagonal(){
+  public static boolean checkDiagonal(char symbol){
     boolean check=true;
-    if((board[0][0]==board[1][1])&&(empty(2,2))){
-      return Move(2,2,check);
-    } else if((board[0][0]==board[2][2])&&(empty(1,1))){
-      return Move(1,1,check);
-    } else if((board[1][1]==board[2][2])&&(empty(0,0))){
-      return Move(0,0,check);
-    } else{
-      return false;
+    if (!twoOccupied(0,0,1,1,2,2,check,symbol)){
+      if (!twoOccupied(0,0,2,2,1,1,check,symbol)) {
+        if (!twoOccupied(1,1,2,2,0,0,check,symbol)) {
+          check=false;
+        }
+      }
     }
+    return check;
   }
 
-  public static boolean checkOppositeDiagonal(){
+
+  public static boolean checkOppositeDiagonal(char symbol) {
     boolean check=true;
-    if((board[0][2]==board[1][1])&&(empty(2,0))){
-      return Move(2,0,check);
-    } else if((board[0][2]==board[2][0])&&(empty(1,1))){
-      return Move(1,1,check);
-    } else if((board[1][1]==board[2][0])&&(empty(0,2))){
-      return Move(0,2,check);
-    } else{
-      return false;
+    if (!twoOccupied(0,2,1,1,2,0,check,symbol)){
+      if (!twoOccupied(0,2,2,0,1,1,check,symbol)) {
+        if (!twoOccupied(1,1,2,0,0,2,check,symbol)) {
+          check=false;
+        }
+      }
     }
+    return check;
   }
+
 
   public static void player(){
     System.out.println("Please enter your move");
