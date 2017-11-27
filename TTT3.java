@@ -49,16 +49,31 @@ public class TTT3{
     }
   }
 
+  public static boolean goCenter(){
+    boolean check = false;
+    if(board[1][1]==' '){
+      board[1][1]='O';
+      currentR=1;
+      currentC=1;
+      check=true;
+    }
+    return check;
+  }
+
+
+
+
   public static void computer(){
     System.out.println("Now it's my turn");
     System.out.println(" ");
-    if(i%2==0){
-      if(board[1][1]==' '){ //computer go second
-        board[1][1]='O';
-        currentR=1;
-        currentC=1;
+    if(i%2==0){// user go first
+      if(!goCenter()){
+        if(!twoOccupied()){
+          if(!Corner()){
+            checkempty();
+          }
+        }
       }
-
     }
     if (i%2!=0){ //computer go first
       if(i==1){
