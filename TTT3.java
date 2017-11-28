@@ -98,6 +98,11 @@ public class TTT3{
           }
         }
       }
+      else if((i==5)&&(board[1][1]==' ')){
+        board[1][1]='O';
+        currentR=0;
+        currentC=0;
+      }
       else{
         if(!NoughtsOrCross('O')){
           if(!NoughtsOrCross('X')){
