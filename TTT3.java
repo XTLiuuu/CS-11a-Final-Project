@@ -27,14 +27,6 @@ public class TTT3{
     }while(currentS.equals("P"));
   }
 
-  public static void initialize(){
-    for(int row=0; row<3; row++){
-      for (int column=0; column<3; column++){ //go through every rows and columns
-        board[row][column]=' '; //every space is empty
-      }
-    }
-  }
-
   public static void playTurn(){
     if(first){
       player();
@@ -121,52 +113,6 @@ public class TTT3{
     return check=checkEdge(check);
   }
 
-  public static boolean checkEdge(boolean check){
-    if(board[0][1]==' '){
-      return Move(0,1,check);
-    } else if(board[1][0]==' '){
-      return Move(1,0,check);
-    } else if(board[1][2]==' '){
-      return Move(1,2,check);
-    } else if(board[2][1]==' '){
-      return Move(2,1,check);
-    } else{
-      return false;
-    }
-  }
-
-  public static boolean Corner(){
-    boolean check=true;
-    return check=checkCorner(check);
-  }
-
-  public static boolean checkCorner(boolean check){
-    if(board[0][0]==' '){
-      return Move(0,0,check);
-    } else if(board[0][2]==' '){
-      return Move(0,2,check);
-    } else if(board[2][2]==' '){
-      return Move(2,2,check);
-    } else if(board[2][0]==' '){
-      return Move(2,0,check);
-    } else{
-      return false;
-    }
-  }
-
-   public static void checkempty(){
-     for (int row = 0; row < 3; row++) {
-        for (int col = 0; col < 3; col++) {
-           if (board[row][col] == ' ') {
-              board[row][col] = 'O';
-              currentR=row;
-              currentC=col;
-              break;
-           }
-        }
-     }
-   }
-
   public static boolean NoughtsOrCross(char symbol){
     boolean check=true;
     if(Row(symbol)==false) {
@@ -185,20 +131,6 @@ public class TTT3{
     boolean check=true;
     return check=checkRow(check,symbol);
   }
-
-  public static boolean checkRow(boolean check,char symbol){
-    for(int row=0;row<3;row++){
-      if (twoOccupied(row,0,row,1,row,2,check,symbol)){
-        return true;
-      } else if (twoOccupied(row,0,row,2,row,1,check,symbol)){
-        return true;
-      } else if (twoOccupied(row,1,row,2,row,0,check,symbol)){
-        return true;
-      } else {}
-    }
-    return false;
-  }
-
 
 
   /**
@@ -230,46 +162,6 @@ public class TTT3{
     return check=checkCol(check,symbol);
   }
 
-  public static boolean checkCol(boolean check,char symbol){
-    for(int col=0;col<3;col++){
-      if (twoOccupied(0,col,1,col,2,col,check,symbol)){
-        return true;
-      } else if (twoOccupied(0,col,2,col,1,col,check,symbol)){
-        return true;
-      } else if (twoOccupied(1,col,2,col,0,col,check,symbol)){
-        return true;
-      } else {}
-    }
-    return false;
-  }
-
-
-  public static boolean checkDiagonal(char symbol){
-    boolean check=true;
-    if (!twoOccupied(0,0,1,1,2,2,check,symbol)){
-      if (!twoOccupied(0,0,2,2,1,1,check,symbol)) {
-        if (!twoOccupied(1,1,2,2,0,0,check,symbol)) {
-          check=false;
-        }
-      }
-    }
-    return check;
-  }
-
-
-  public static boolean checkOppositeDiagonal(char symbol) {
-    boolean check=true;
-    if (!twoOccupied(0,2,1,1,2,0,check,symbol)){
-      if (!twoOccupied(0,2,2,0,1,1,check,symbol)) {
-        if (!twoOccupied(1,1,2,0,0,2,check,symbol)) {
-          check=false;
-        }
-      }
-    }
-    return check;
-  }
-
-
   public static void player(){
     System.out.println("Please enter your move");
     int row=input.nextInt()-1;
@@ -287,57 +179,3 @@ public class TTT3{
       player();
    }
  }
-
-
-  public static void printboard(){
-    System.out.println();
-    System.out.println(board[0][0]+" | "+board[0][1]+" | "+board[0][2]);
-    System.out.println("---------");
-    System.out.println(board[1][0]+" | "+board[1][1]+" | "+board[1][2]);
-    System.out.println("---------");
-    System.out.println(board[2][0]+" | "+board[2][1]+" | "+board[2][2]);
-    System.out.println();
-  }
-
-  public static void checkwinner(int currentR,int currentC){
-    currentPlayer=(char)(board[currentR][currentC]);
-    if (win(currentPlayer,currentR, currentC)){
-      if(currentPlayer=='X'){
-        currentS="X";
-      }
-      else{
-        currentS="O";
-      }
-    }
-    else if(tie()){
-      currentS="T";
-    }
-  }
-
-  public static boolean tie(){
-    for (int row = 0; row < 3; row++) {
-       for (int col = 0; col < 3; col++) {
-          if (board[row][col] == ' ') {
-             return false;  // not every cell is filled in
-          }
-       }
-    }
-    return true;  // no empty cells
-  }
-
-  public static boolean win(char currentPlayer, int currentR, int currentC){
-    return ((board[currentR][0] == currentPlayer)&&(board[currentR][1] == currentPlayer)&&(board[currentR][2] == currentPlayer))
-        || ((board[0][currentC] == currentPlayer)&&(board[1][currentC] == currentPlayer)&&(board[2][currentC] == currentPlayer))
-        || ((currentR== currentC)&&(board[0][0] == currentPlayer)&&(board[1][1] == currentPlayer)&&(board[2][2] == currentPlayer))
-        || ((currentR + currentC == 2)&&(board[0][2] == currentPlayer)&&(board[1][1] == currentPlayer)&&(board[2][0] == currentPlayer));
-  }
-
-
-  public static boolean empty(int row,int col){
-    if (board[row][col]==' '){
-      return true;
-    } else {
-      return false;
-    }
-  }
-}
