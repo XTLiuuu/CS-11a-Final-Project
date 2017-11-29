@@ -9,7 +9,7 @@ public class Check{
   public static boolean goCenter(){
     boolean check = true; // initialize check as true
     if(board[1][1]==' '){ // check if the center cell is empty
-      return check=Move(1,1,check); // return true; and computer occupies the center cell
+      return check=Board.move(1,1,check); // return true; and computer occupies the center cell
     } else {
       return false; // return false if the center cell is already occupied
     }
@@ -33,13 +33,13 @@ public class Check{
   */
   public static boolean checkEdge(boolean check){
     if(board[0][1]==' '){ // check if cell[0][1] is empty
-      return move(0,1,check); // return true; and computer occupies cell [0][1]
+      return Board.move(0,1,check); // return true; and computer occupies cell [0][1]
     } else if(board[1][0]==' '){ // check if cell[1][0] is empty
-      return move(1,0,check); // return true; and computer occupies cell [1][0]
+      return Board.move(1,0,check); // return true; and computer occupies cell [1][0]
     } else if(board[1][2]==' '){ // check if cell[1][2] is empty
-      return move(1,2,check); // return true; and computer occupies cell [1][2]
+      return Board.move(1,2,check); // return true; and computer occupies cell [1][2]
     } else if(board[2][1]==' '){ // check if cell[2][1] is empty
-      return move(2,1,check); // return true; and computer occupies cell [2][1]
+      return Board.move(2,1,check); // return true; and computer occupies cell [2][1]
     } else{
       return false; // return false if none of cell0][1], cell[1][0], cell[1][2], cell[2][1] is empty
     }
@@ -62,13 +62,13 @@ public class Check{
   */
   public static boolean checkCorner(boolean check){
     if(board[0][0]==' '){ // check if cell[0][0] is empty
-      return move(0,0,check); // return true; and computer occupies cell [0][0]
+      return Board.move(0,0,check); // return true; and computer occupies cell [0][0]
     } else if(board[0][2]==' '){ // check if cell[0][2] is empty
-      return move(0,2,check); // return true; and computer occupies cell [0][2]
+      return Board.move(0,2,check); // return true; and computer occupies cell [0][2]
     } else if(board[2][2]==' '){ // check if cell[2][2] is empty
-      return move(2,2,check); // return true; and computer occupies cell [2][2]
+      return Board.move(2,2,check); // return true; and computer occupies cell [2][2]
     } else if(board[2][0]==' '){ // check if cell[2][0] is empty
-      return move(2,0,check); // return true; and computer occupies cell [2][0]
+      return Board.move(2,0,check); // return true; and computer occupies cell [2][0]
     } else{
       return false; // return false if none of the corner cells is empty
     }
@@ -92,7 +92,7 @@ public class Check{
   }
 
   /**
-  Check if there are two noughts or crosses in a single row, column or diagonal
+  Check if there are two noughts or crosses on a single row, column or diagonal
   @param symbol 'X' or 'O'
   @return true if there are two noughts or crosses in a single row, column or diagonal; otherwise, false
   */
@@ -158,7 +158,7 @@ public class Check{
   */
   public static boolean twoOccupied(int a, int b, int c,int d,int e,int f,boolean check,char symbol){
     if(board[a][b]==symbol && board[c][d]==symbol && empty(e,f)) {
-      return move(e,f,check);
+      return Board.move(e,f,check);
     } else {
       return false;
     }
