@@ -74,22 +74,21 @@ public class TTT100{
 
 
   /**
+  a sequence of computer's moves if computer goes first
   */
   public static void computerGoFirst() {
     if (i==1){ //the first move of the game (computer's first move)
       moveV2(0,0,'O');//computer takes the upper left corner
     } else if(i==3){ //the third move of the game (computer's second move)
       computerGoFirstSecondMove();
-    } else if((i==5)&&(board[1][1]==' ')){
-      moveV2(1,1,'O');
     } else{
-      computerGoFirstGeneralMove();
+      computerGoFirstGeneralMovingRules();
     }
   }
 
 
   /**
-  computer's second move when it goes first
+  computer's second move when computer goes first
   */
   public static void computerGoFirstSecondMove() {
     if(board[1][1]=='X'){ //check whether the center cell is occupied by the user (the user's first move)
@@ -107,6 +106,9 @@ public class TTT100{
 
   /**
   computer occupies a specific cell
+  @param a the row number of the cell
+  @param b the column number of the cell
+  @param symbol 'X'or 'O'
   */
   public static void moveV2 (int a, int b, char symbol){
     board[a][b]=symbol; //computer occupies this cell
@@ -115,8 +117,9 @@ public class TTT100{
   }
 
   /**
+  general moving rules the computer should follow from its third move
   */
-  public static void computerGoFirstGeneralMove() {
+  public static void computerGoFirstGeneralMovingRules() {
     if(!Check.noughtsOrCross('O')){
       if(!Check.noughtsOrCross('X')){
         if(Check.corner()==false){
@@ -144,7 +147,11 @@ public class TTT100{
 
 
   /**
-  The user's move
+  Prompts users for the index of the cell they want to occupy.
+  If the row number and column number entered by the user is within 1 to 3, then
+  mark that cell as 'X' and print the board after the user's move.
+  If the user enters a row number or column number larger than 3 or smaller than
+  1, then prints out an error message.
   */
 
   public static void player(){
