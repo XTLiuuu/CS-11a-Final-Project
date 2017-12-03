@@ -96,6 +96,7 @@ public class TTT200 extends JFrame{
     do{
       playTurn(); //the main game class of computer and user
     }while(currentS.equals("P")); //currentS remains the initialize value when the game is in process
+    printGameResult();
   }
 
   /**
