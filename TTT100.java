@@ -1,12 +1,9 @@
 package TicTacToe;
 
-import java.util.Scanner;
-
 public class TTT100{
 
   public static char[][] board = new char[3][3]; //declare an array of a 3x3 board
   public static boolean first; //whether the player want to move first
-  public static Scanner input = new Scanner(System.in); //input
   public static int currentR,currentC; //currentR is the row of the cell in the current move, currentC is the column of the cell in current move
   public static String currentS="P"; //currentS is the game status, "P" represents playing
   public static char currentPlayer; //currentPlayer is the current player for the next move
@@ -21,7 +18,11 @@ public class TTT100{
   public static void main(String[] args) {
     Board.initialize(args); //initialize the game before every new game begins
     System.out.println("Would you like to go first?");
-    first=TextIO.getlnBoolean(); //whether the user chooses to play first
+    String goFirst = TextIO.getlnString();
+
+    if(goFirst.substring(0,1).equalsIgnoreCase("y")){
+      first=true;  //whether the user chooses to play first
+    }
     do{
       playTurn(); //the main game class of computer and user
       Winner.printGameResult();// prints out the result of the game
@@ -156,8 +157,8 @@ public class TTT100{
 
   public static void player(){
     System.out.println("Please enter your move");
-    int row=input.nextInt()-1; //turn the format of row into the right version that the computer can read ?
-    int column=input.nextInt()-1; //turn the format of column into the right version that the computer can read ?
+    int row=TextIO.getInt()-1; //turn the format of row into the right version that the computer can read ?
+    int column=TextIO.getInt()-1; //turn the format of column into the right version that the computer can read ?
     if ((row >= 0)&&(row < 3)&&(column>= 0)&&(column< 3)&&(board[row][column]==' ')){ //check if the user's move is valid (whether the cell is empty)
       moveV2(row,column,'X'); //input the user's move
       Board.printBoard(); //print the board after this move
@@ -166,5 +167,6 @@ public class TTT100{
       System.out.println("This move is not valid. Please try again");
       player(); //ask the user to input again
    }
+   Winner.checkWinner(currentR,currentC);
  }
 }
