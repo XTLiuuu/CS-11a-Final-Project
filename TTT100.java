@@ -24,21 +24,8 @@ public class TTT100{
     first=TextIO.getlnBoolean(); //whether the user chooses to play first
     do{
       playTurn(); //the main game class of computer and user
+      Winner.printGameResult();// prints out the result of the game
     }while(currentS.equals("P")); //currentS remains the initialize value when the game is in process
-  }
-
-  /**
-  prints out the result of the game
-  */
-  public static void printGameResult(){
-    if (currentS.equals("X")){ //"X" will be assigned to currentS when the user wins
-      System.out.println("You win!");} // print out the game result
-    else if (currentS.equals("O")){ //"O" will be assigned to currentS when the computer wins
-      System.out.println("I win!"); // print out the game result
-    }
-    else if (currentS.equals("T")){ //"T" will be assigned to currentS when it is a tie
-      System.out.println("This is a tie!"); //print out the game result
-    }
   }
 
   /**
@@ -93,7 +80,7 @@ public class TTT100{
       moveV2(0,0,'O');//computer takes the upper left corner
     } else if(i==3){ //the third move of the game (computer's second move)
       computerGoFirstSecondMove();
-    } else if((i==5)&&(board[1][1]==' ')){ //corporate with i=3???????????
+    } else if((i==5)&&(board[1][1]==' ')){
       moveV2(1,1,'O');
     } else{
       computerGoFirstGeneralMove();
