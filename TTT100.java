@@ -54,7 +54,7 @@ public class TTT100{
    empty cell it finds.
   */
   public static void userGoFirst() {
-    if(!goCenter()){ //if the center cell is not empty
+    if(!Check.goCenter()){ //if the center cell is not empty
       if(!Check.noughtsOrCross('O')){ //check if there are two 'O' on the same row, column or diagonal
         if(!Check.noughtsOrCross('X')){ //check if there are two 'X' on the same row, column or diagonal
           if(!Check.edge()){ //check if there are empty cells on the edge
@@ -87,9 +87,8 @@ public class TTT100{
 
 
   /**
-
   */
-  public static void computerGoFirst {
+  public static void computerGoFirst() {
     if (i==1){ //the first move of the game (computer's first move)
       moveV2(0,0,'O');//computer takes the upper left corner
     } else if(i==3){ //the third move of the game (computer's second move)
@@ -105,7 +104,7 @@ public class TTT100{
   /**
   computer's second move when it goes first
   */
-  public static void computerGoFirstSecondMove {
+  public static void computerGoFirstSecondMove() {
     if(board[1][1]=='X'){ //check whether the center cell is occupied by the user (the user's first move)
       moveV2(2,2,'O');// computer takes the center
     } else{
@@ -130,7 +129,7 @@ public class TTT100{
 
   /**
   */
-  public static void computerGoFirstGeneralMove {
+  public static void computerGoFirstGeneralMove() {
     if(!Check.noughtsOrCross('O')){
       if(!Check.noughtsOrCross('X')){
         if(Check.corner()==false){

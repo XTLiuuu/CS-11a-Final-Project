@@ -20,7 +20,7 @@ public class Check{
   check if there are empty cells on the edges (i.e. cell [0][1],[1][0],[1][2],[2][1])
   @return true if there are empty cells on the edges
   */
-  public static boolean Edge(){
+  public static boolean edge(){
     boolean check=true; // intialize check as true
     // return true if computer occupies one of cell0][1], cell[1][0], cell[1][2], cell[2][1]; otherwise, false
     return check=checkEdge(check);
@@ -79,13 +79,14 @@ public class Check{
   empty cell it finds
   */
   public static void checkEmpty(){
+    int x=0;
     for (int row = 0; row < 3; row++) {
        for (int col = 0; col < 3; col++) {
-          if (TTT100.board[row][col] == ' ') {
+          if ((TTT100.board[row][col] == ' ')&&(x==0)) {
              TTT100.board[row][col] = 'O';
              TTT100.currentR=row;
              TTT100.currentC=col;
-             break;
+             x=1;
           }
        }
     }
