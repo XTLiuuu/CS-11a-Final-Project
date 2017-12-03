@@ -19,7 +19,7 @@ public class TTT100{
   */
 
   public static void main(String[] args) {
-    initialize(); //initialize the game before every new game begins
+    Board.initialize(args); //initialize the game before every new game begins
     System.out.println("Would you like to go first?");
     first=TextIO.getlnBoolean(); //whether the user chooses to play first
     do{
@@ -49,7 +49,7 @@ public class TTT100{
     }
     else{
       computer(); //the computer's move
-      printBoard(); //print out the current board
+      Board.printBoard(); //print out the current board
       first=true; //the next player will be the user
       i++; //the number of moves in the game increases by 1
     }
@@ -63,10 +63,10 @@ public class TTT100{
     System.out.println("Now it's my turn");
     System.out.println(" ");
     if(i%2==0){ //when user goes first, the move number of the computer is even
-      if(!goCenter()){ //if the center cell is not empty
+      if(!Check.goCenter()){ //if the center cell is not empty
         if(!Check.noughtsOrCross('O')){ //check if there are two 'O' on the same row, column or diagonal
           if(!Check.noughtsOrCross('X')){ //check if there are two 'X' on the same row, column or diagonal
-            if(!Check.edge()){ //check if there are empty cells on the edge
+            if(!Check.Edge()){ //check if there are empty cells on the edge
               Check.checkEmpty(); //the computer will make a move
             }
           }
@@ -116,7 +116,7 @@ public class TTT100{
         }
       }
     }
-    Board.checkWinner(currentR,currentC);  //check if there is a winner or a tie or still in process
+    Winner.checkWinner(currentR,currentC);  //check if there is a winner or a tie or still in process
   }
 
 
@@ -133,7 +133,6 @@ public class TTT100{
       currentR=row;
       currentC=column;
       Board.printBoard(); //print the board after this move
-      checkW=Board.winner(currentR,currentC); //check the game status
       first=false; //change the next player to computer
     }
     else{ //if the user's move is not valid

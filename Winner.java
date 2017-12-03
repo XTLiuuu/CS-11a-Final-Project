@@ -14,7 +14,7 @@ public class Winner {
   public static boolean tie(){
     for (int row = 0; row < 3; row++) {
        for (int col = 0; col < 3; col++) {
-          if (board[row][col] == ' ') {
+          if (TTT100.board[row][col] == ' ') {
              return false;  // not every cell is filled in
           }
        }
@@ -31,10 +31,10 @@ public class Winner {
   @return return true if a player wins; return falls if nobody has won
   */
   public static boolean win(char currentPlayer, int currentR, int currentC){
-    return ((board[currentR][0] == currentPlayer)&&(board[currentR][1] == currentPlayer)&&(board[currentR][2] == currentPlayer)) //if the current player gets three in a row
-        || ((board[0][currentC] == currentPlayer)&&(board[1][currentC] == currentPlayer)&&(board[2][currentC] == currentPlayer)) //if the current player gets three in a column
-        || ((currentR== currentC)&&(board[0][0] == currentPlayer)&&(board[1][1] == currentPlayer)&&(board[2][2] == currentPlayer)) //if the current player has three in a diagonal
-        || ((currentR + currentC == 2)&&(board[0][2] == currentPlayer)&&(board[1][1] == currentPlayer)&&(board[2][0] == currentPlayer)); //if the current player has three in the opposite diagonal
+    return ((TTT100.board[currentR][0] == currentPlayer)&&(TTT100.board[currentR][1] == currentPlayer)&&(TTT100.board[currentR][2] == currentPlayer)) //if the current player gets three in a row
+        || ((TTT100.board[0][currentC] == currentPlayer)&&(TTT100.board[1][currentC] == currentPlayer)&&(TTT100.board[2][currentC] == currentPlayer)) //if the current player gets three in a column
+        || ((currentR== currentC)&&(TTT100.board[0][0] == currentPlayer)&&(TTT100.board[1][1] == currentPlayer)&&(TTT100.board[2][2] == currentPlayer)) //if the current player has three in a diagonal
+        || ((currentR + currentC == 2)&&(TTT100.board[0][2] == currentPlayer)&&(TTT100.board[1][1] == currentPlayer)&&(TTT100.board[2][0] == currentPlayer)); //if the current player has three in the opposite diagonal
   }
 
 
@@ -45,18 +45,18 @@ public class Winner {
   @param currentC the number of column the current player puts X or O on
   */
 
-  public static void checkwinner(int currentR, int currentC){
-     currentPlayer=(char)(board[currentR][currentC]);
-     if (win(currentPlayer,currentR, currentC)){ //if we have a winner at this time
-       if(currentPlayer=='X'){ //the winner is the user
-         currentS="X";
+  public static void checkWinner(int currentR, int currentC){
+     TTT100.currentPlayer=(char)(TTT100.board[currentR][currentC]);
+     if (win(TTT100.currentPlayer,TTT100.currentR,TTT100.currentC)){ //if we have a winner at this time
+       if(TTT100.currentPlayer=='X'){ //the winner is the user
+         TTT100.currentS="X";
        }
        else{ //the winner is the computer
-         currentS="O";
+         TTT100.currentS="O";
        }
      }
      else if(tie()){ //if there is no winner at this time
-       currentS="T";
+       TTT100.currentS="T";
      }
    }
 

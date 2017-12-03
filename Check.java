@@ -8,8 +8,8 @@ public class Check{
   */
   public static boolean goCenter(){
     boolean check = true; // initialize check as true
-    if(board[1][1]==' '){ // check if the center cell is empty
-      return check=Board.move(1,1,check); // return true; and computer occupies the center cell
+    if(TTT100.board[1][1]==' '){ // check if the center cell is empty
+      return check=Board.Move(1,1,check); // return true; and computer occupies the center cell
     } else {
       return false; // return false if the center cell is already occupied
     }
@@ -32,14 +32,14 @@ public class Check{
   @return true if one of cell0][1], cell[1][0], cell[1][2], cell[2][1] is empty; otherwise, false
   */
   public static boolean checkEdge(boolean check){
-    if(board[0][1]==' '){ // check if cell[0][1] is empty
-      return Board.move(0,1,check); // return true; and computer occupies cell [0][1]
-    } else if(board[1][0]==' '){ // check if cell[1][0] is empty
-      return Board.move(1,0,check); // return true; and computer occupies cell [1][0]
-    } else if(board[1][2]==' '){ // check if cell[1][2] is empty
-      return Board.move(1,2,check); // return true; and computer occupies cell [1][2]
-    } else if(board[2][1]==' '){ // check if cell[2][1] is empty
-      return Board.move(2,1,check); // return true; and computer occupies cell [2][1]
+    if(TTT100.board[0][1]==' '){ // check if cell[0][1] is empty
+      return Board.Move(0,1,check); // return true; and computer occupies cell [0][1]
+    } else if(TTT100.board[1][0]==' '){ // check if cell[1][0] is empty
+      return Board.Move(1,0,check); // return true; and computer occupies cell [1][0]
+    } else if(TTT100.board[1][2]==' '){ // check if cell[1][2] is empty
+      return Board.Move(1,2,check); // return true; and computer occupies cell [1][2]
+    } else if(TTT100.board[2][1]==' '){ // check if cell[2][1] is empty
+      return Board.Move(2,1,check); // return true; and computer occupies cell [2][1]
     } else{
       return false; // return false if none of cell0][1], cell[1][0], cell[1][2], cell[2][1] is empty
     }
@@ -61,14 +61,14 @@ public class Check{
   @return true if computer moves to an empty cell in the corner; otherwise, false
   */
   public static boolean checkCorner(boolean check){
-    if(board[0][0]==' '){ // check if cell[0][0] is empty
-      return Board.move(0,0,check); // return true; and computer occupies cell [0][0]
-    } else if(board[0][2]==' '){ // check if cell[0][2] is empty
-      return Board.move(0,2,check); // return true; and computer occupies cell [0][2]
-    } else if(board[2][2]==' '){ // check if cell[2][2] is empty
-      return Board.move(2,2,check); // return true; and computer occupies cell [2][2]
-    } else if(board[2][0]==' '){ // check if cell[2][0] is empty
-      return Board.move(2,0,check); // return true; and computer occupies cell [2][0]
+    if(TTT100.board[0][0]==' '){ // check if cell[0][0] is empty
+      return Board.Move(0,0,check); // return true; and computer occupies cell [0][0]
+    } else if(TTT100.board[0][2]==' '){ // check if cell[0][2] is empty
+      return Board.Move(0,2,check); // return true; and computer occupies cell [0][2]
+    } else if(TTT100.board[2][2]==' '){ // check if cell[2][2] is empty
+      return Board.Move(2,2,check); // return true; and computer occupies cell [2][2]
+    } else if(TTT100.board[2][0]==' '){ // check if cell[2][0] is empty
+      return Board.Move(2,0,check); // return true; and computer occupies cell [2][0]
     } else{
       return false; // return false if none of the corner cells is empty
     }
@@ -81,10 +81,10 @@ public class Check{
   public static void checkEmpty(){
     for (int row = 0; row < 3; row++) {
        for (int col = 0; col < 3; col++) {
-          if (board[row][col] == ' ') {
-             board[row][col] = 'O';
-             currentR=row;
-             currentC=col;
+          if (TTT100.board[row][col] == ' ') {
+             TTT100.board[row][col] = 'O';
+             TTT100.currentR=row;
+             TTT100.currentC=col;
              break;
           }
        }
@@ -101,7 +101,7 @@ public class Check{
     if(!row(symbol)) { // check if there are two noughts or two crosses on a single row
       if(!col(symbol)) { // check if there are two noughts or two crosses on a single column
         if(!checkDiagonal(symbol)){ //check if there are two noughts or two crosses on the diagonal from left to right
-          if(!checkOppositeDiagonal(symbol){ // check if there are two noughts or two crosses on the diagonal from right to left
+          if(!checkOppositeDiagonal(symbol)){ // check if there are two noughts or two crosses on the diagonal from right to left
             check=false; // set check as false if there is no single row, column, or diagonal having two noughts or two crosses
           }
         }
@@ -157,8 +157,8 @@ public class Check{
   @return true if a row, column, or diagonal has two cells with the same symbol and the remaining cell is empty; otherwise, false
   */
   public static boolean twoOccupied(int a, int b, int c,int d,int e,int f,boolean check,char symbol){
-    if(board[a][b]==symbol && board[c][d]==symbol && empty(e,f)) {
-      return Board.move(e,f,check);
+    if(TTT100.board[a][b]==symbol && TTT100.board[c][d]==symbol && empty(e,f)) {
+      return Board.Move(e,f,check);
     } else {
       return false;
     }
@@ -245,7 +245,7 @@ public class Check{
     @return true if the cell is empty, false if the cell is occupied; otherwise, false
   */
   public static boolean empty(int row,int col){
-    if (board[row][col]==' '){ // check if a specific cell is empty
+    if (TTT100.board[row][col]==' '){ // check if a specific cell is empty
       return true;
     } else {
       return false;
