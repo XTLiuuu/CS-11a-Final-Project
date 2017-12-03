@@ -64,12 +64,12 @@ public class Winner {
  prints out the result of the game
  */
  public static void printGameResult(){
-   if (currentS.equals("X")){ //"X" will be assigned to currentS when the user wins
+   if (TTT100.currentS.equals("X")){ //"X" will be assigned to currentS when the user wins
      System.out.println("You win!");} // print out the game result
-   else if (currentS.equals("O")){ //"O" will be assigned to currentS when the computer wins
+   else if (TTT100.currentS.equals("O")){ //"O" will be assigned to currentS when the computer wins
      System.out.println("I win!"); // print out the game result
    }
-   else if (currentS.equals("T")){ //"T" will be assigned to currentS when it is a tie
+   else if (TTT100.currentS.equals("T")){ //"T" will be assigned to currentS when it is a tie
      System.out.println("This is a tie!"); //print out the game result
    }
  }
