@@ -33,10 +33,9 @@ public class Winner {
   public static boolean win(char currentPlayer, int currentR, int currentC){
     return ((TTT100.board[currentR][0] == currentPlayer)&&(TTT100.board[currentR][1] == currentPlayer)&&(TTT100.board[currentR][2] == currentPlayer)) //if the current player gets three in a row
         || ((TTT100.board[0][currentC] == currentPlayer)&&(TTT100.board[1][currentC] == currentPlayer)&&(TTT100.board[2][currentC] == currentPlayer)) //if the current player gets three in a column
-        || ((currentR== currentC)&&(TTT100.board[0][0] == currentPlayer)&&(TTT100.board[1][1] == currentPlayer)&&(TTT100.board[2][2] == currentPlayer)) //if the current player has three in a diagonal
+        || ((currentR == currentC)&&(TTT100.board[0][0] == currentPlayer)&&(TTT100.board[1][1] == currentPlayer)&&(TTT100.board[2][2] == currentPlayer)) //if the current player has three in a diagonal
         || ((currentR + currentC == 2)&&(TTT100.board[0][2] == currentPlayer)&&(TTT100.board[1][1] == currentPlayer)&&(TTT100.board[2][0] == currentPlayer)); //if the current player has three in the opposite diagonal
   }
-
 
 
   /**
@@ -44,34 +43,31 @@ public class Winner {
   @param currentR the number of row the current player puts X or O on
   @param currentC the number of column the current player puts X or O on
   */
-
   public static void checkWinner(int currentR, int currentC){
-     TTT100.currentPlayer=(char)(TTT100.board[currentR][currentC]);
-     if (win(TTT100.currentPlayer,TTT100.currentR,TTT100.currentC)){ //if we have a winner at this time
-       if(TTT100.currentPlayer=='X'){ //the winner is the user
-         TTT100.currentS="X";
+     char currentPlayer = TTT100.board[currentR][currentC];
+     if (win(currentPlayer,TTT100.currentR,TTT100.currentC)){ //if we have a winner at this time
+       if(currentPlayer == 'X'){ //the winner is the user
+         TTT100.dialog.setText("You won the game!");
+       }else if (currentPlayer == 'O'){ //the winner is the computer
+         TTT100.dialog.setText("You lost the game!");
        }
-       else{ //the winner is the computer
-         TTT100.currentS="O";
-       }
-     }
-     else if(tie()){ //if there is no winner at this time
-       TTT100.currentS="T";
+       disableBoard();
+     }else if(tie()){ //if there is no winner at this time
+       TTT100.dialog.setText("The game was tied!");
+       disableBoard();
      }
    }
 
  /**
- prints out the result of the game
+  Disables board when game ends.
  */
- public static void printGameResult(){
-   if (TTT100.currentS.equals("X")){ //"X" will be assigned to currentS when the user wins
-     System.out.println("You win!");} // print out the game result
-   else if (TTT100.currentS.equals("O")){ //"O" will be assigned to currentS when the computer wins
-     System.out.println("I win!"); // print out the game result
-   }
-   else if (TTT100.currentS.equals("T")){ //"T" will be assigned to currentS when it is a tie
-     System.out.println("This is a tie!"); //print out the game result
+ public static void disableBoard(){
+   for (int row = 0; row < 3; row++) {
+     for (int column = 0; column < 3; column++) {
+       TTT100.boardB[row][column].setEnabled(false); //all buttons cannot be pressed again
+     }
    }
  }
+
 
 }
