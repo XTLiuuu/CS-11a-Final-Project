@@ -109,9 +109,11 @@ public class TTT100 extends JFrame{ //lets TTT100 use JFrame elements
 					Check.checkEmpty();
 			}
 		}
-    boardB[currentR][currentC].setText("O");
-    boardB[currentR][currentC].setEnabled(false); // updates buttons
-    Winner.checkWinner(currentR,currentC);  //check if there is a winner or a tie or still in process
+    if(boardB[currentR][currentC].isEnabled()){
+      boardB[currentR][currentC].setText("O");
+      boardB[currentR][currentC].setEnabled(false); // updates buttons
+      Winner.checkWinner(currentR,currentC);  //check if there is a winner or a tie or still in process
+    }
   }
 
 }
