@@ -6,12 +6,12 @@ There are two folders in the github. The "TicTacToe" folder plays in the Termina
 # Screenshots 
 TicTacToe without GUI 
 
-![screenshot1](screenshot1.jpg)
+![screenshot1](TicTacToe/screenshot1.jpg)
 
 
 TicTacToe with GUI 
 
-![screenshot2](screenshot2.png)
+![screenshot2](TicTacToeGUI/screenshot2.png)
 
 # Built with 
 Java 
