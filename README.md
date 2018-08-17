@@ -4,9 +4,15 @@ TicTacToe is a game for two players. One is X and the other is O. Players take t
 There are two folders in the github. The "TicTacToe" folder plays in the Terminal for Macs or Shell for Windows. The "TicTacToeGUI" has a GUI feature. Players can play games in a pop-up GUI window. 
 
 # Screenshots 
-![screenshot1] (https://github.com/XTLiuuu/TicTacToe/blob/master/screenshot1.jpg)
+TicTacToe without GUI 
 
-![screenshot2] (https://github.com/XTLiuuu/TicTacToe/blob/master/screenshot1.jpg)
+![screenshot1](screenshot1.jpg)
+
+
+TicTacToe with GUI 
+
+![screenshot2](screenshot2.png)
+
 # Built with 
 Java 
 
