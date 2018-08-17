@@ -16,9 +16,6 @@ There are two folders in the github. The "TicTacToe" folder plays in the Termina
 ![screenshot2](TicTacToeGUI/screenshot2.png)
 
 
-# Built with 
-Java 
-
 # Run Command 
 TicTacToe folder: java TicTacToe.TTT100
 
