@@ -6,7 +6,7 @@ There are two folders in the github. The "TicTacToe" folder plays in the Termina
 # Screenshots 
 TicTacToe without GUI 
 
-![screenshot1](TicTacToe/screenshot1.jpg)
+![screenshot1](TicTacToe/screenshot1.png)
 
 
 TicTacToe with GUI 
